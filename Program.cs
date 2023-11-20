@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MyDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("project")));
 
 builder.Services.Configure<AppSetting>(builder.Configuration.GetSection("AppSettings"));
 

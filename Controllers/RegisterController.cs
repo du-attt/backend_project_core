@@ -20,8 +20,30 @@ namespace backend_project_core.Controllers
         }
         [HttpPost]
         [Route("register")]
-        public string Register(Users user)
+        public string Register(RegisterModel model)
         {
+            // Lấy dữ liệu từ sql lên
+            var existingUser = _userDbContext.Users.SingleOrDefault(p => p.email == model.email);
+            // Kiểm tra tính hợp lệ của dữ liệu đầu vào
+            if (existingUser != null)
+            {
+                return "Email already exists!";
+            }
+
+            // Tạo một đối tượng User từ dữ liệu model
+            var user = new Users
+            {
+                // Gán các thuộc tính từ model
+                name = model.name,
+                password = Users.HashPassword(model.password),//chuyển đổi pass
+                email = model.email,
+
+                // Thời gian tạo và cập nhật tài khoản được tạo bằng ngày tạo
+                created_at = DateTime.UtcNow,
+                updated_at = DateTime.UtcNow
+            };
+            
+           // Lưu vào cơ sở dữ liệu
             _userDbContext.Users.Add(user);
             _userDbContext.SaveChanges();
 

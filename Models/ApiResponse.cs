@@ -9,7 +9,7 @@ namespace backend_project_core.Models
     {
         public bool Success { get; set; }
         public string Message { get; set; }
-        public object Data { get; set; }
+        public object access_token { get; set; }
         public object foundUser { get; set; }
     }
 }

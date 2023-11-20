@@ -25,15 +25,16 @@ namespace backend_project_core.Controllers
             _appSettings = optionsMonitor.CurrentValue;
         }
 
-
-
-
         [HttpPost]
         [Route("login")]
         public IActionResult Login(LoginModel model)
         {
+            // Chuyển đổi code thành dạng json
+            var enteredPasswordHash = Users.HashPassword(model.password);
+
             // Kiểm tra xem user có tồn tại trong cơ sở dữ liệu hay không
-            var existingUser = _userDbContext.Users.SingleOrDefault(p => p.email == model.email && p.password == model.password);
+            var existingUser = _userDbContext.Users.SingleOrDefault(p => p.email == model.email && p.password == enteredPasswordHash);
+
             if (existingUser == null) //không đúng
             {
                 return NotFound(new ApiResponse
@@ -54,7 +55,7 @@ namespace backend_project_core.Controllers
             {
                 Success = true,
                 Message = "Authenticate success",
-                Data = GenerateToken(existingUser),
+                access_token = GenerateToken(existingUser),
                 foundUser = userResponse
             });
 
