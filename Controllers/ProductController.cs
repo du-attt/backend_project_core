@@ -25,6 +25,7 @@ namespace backend_project_core.Controllers
             try
             {
                 var products = await _myDbContext.Products.ToListAsync();
+                
                 return Ok(new { products });
             }
             catch (Exception ex)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_project_core.Models;
 
@@ -11,9 +12,11 @@ using backend_project_core.Models;
 namespace backend_project_core.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231217144241_Add-WishlishMigration")]
+    partial class AddWishlishMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,6 @@ namespace backend_project_core.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<string>("InvoiceId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("_idProduct")
                         .IsRequired()
                         .HasColumnType("nvarchar(256)");
@@ -43,10 +43,7 @@ namespace backend_project_core.Migrations
                     b.Property<int>("qty")
                         .HasColumnType("int");
 
-
                     b.HasKey("id");
-
-                    b.HasIndex("InvoiceId");
 
                     b.HasIndex("_idProduct");
 
@@ -96,80 +93,6 @@ namespace backend_project_core.Migrations
                     b.HasKey("_id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("backend_project_core.Data.Invoice", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Company")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("GrandTotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("IssueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("ShippingFee")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("idUser")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("idUser");
-
-                    b.ToTable("Invoice", (string)null);
-                });
-
-            modelBuilder.Entity("backend_project_core.Data.InvoiceDetail", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("_idProduct")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("idInvoice")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("qty")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("_idProduct");
-
-                    b.HasIndex("idInvoice");
-
-                    b.ToTable("InvoiceDetail", (string)null);
                 });
 
             modelBuilder.Entity("backend_project_core.Data.Products", b =>
@@ -322,10 +245,6 @@ namespace backend_project_core.Migrations
 
             modelBuilder.Entity("backend_project_core.Data.CartDetails", b =>
                 {
-                    b.HasOne("backend_project_core.Data.Invoice", null)
-                        .WithMany("CartDetails")
-                        .HasForeignKey("InvoiceId");
-
                     b.HasOne("backend_project_core.Data.Products", "Products")
                         .WithMany("CartDetails")
                         .HasForeignKey("_idProduct")
@@ -355,39 +274,6 @@ namespace backend_project_core.Migrations
                         .HasConstraintName("FK_Cart_User");
 
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("backend_project_core.Data.Invoice", b =>
-                {
-                    b.HasOne("backend_project_core.Data.Users", "Users")
-                        .WithMany("Invoices")
-                        .HasForeignKey("idUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Invoice_User");
-
-                    b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("backend_project_core.Data.InvoiceDetail", b =>
-                {
-                    b.HasOne("backend_project_core.Data.Products", "Products")
-                        .WithMany("InvoiceDetails")
-                        .HasForeignKey("_idProduct")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_InvoiceDetails_Product");
-
-                    b.HasOne("backend_project_core.Data.Invoice", "Invoice")
-                        .WithMany("InvoiceDetails")
-                        .HasForeignKey("idInvoice")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_InvoiceDetail_Invoice");
-
-                    b.Navigation("Invoice");
-
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("backend_project_core.Data.WishlishDetails", b =>
@@ -428,18 +314,9 @@ namespace backend_project_core.Migrations
                     b.Navigation("CartDetails");
                 });
 
-            modelBuilder.Entity("backend_project_core.Data.Invoice", b =>
-                {
-                    b.Navigation("CartDetails");
-
-                    b.Navigation("InvoiceDetails");
-                });
-
             modelBuilder.Entity("backend_project_core.Data.Products", b =>
                 {
                     b.Navigation("CartDetails");
-
-                    b.Navigation("InvoiceDetails");
 
                     b.Navigation("WishlishDetails");
                 });
@@ -447,8 +324,6 @@ namespace backend_project_core.Migrations
             modelBuilder.Entity("backend_project_core.Data.Users", b =>
                 {
                     b.Navigation("Carts");
-
-                    b.Navigation("Invoices");
 
                     b.Navigation("Wishlists");
                 });

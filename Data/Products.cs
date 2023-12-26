@@ -38,5 +38,19 @@ namespace backend_project_core.Data
         public decimal newPrice { get; set; }
 
         public bool trending { get; set; }
+
+
+        // Liên kết đến bảng khác(Khóa ngoại của bảng kia)
+        public ICollection<CartDetails> CartDetails { get; set; }
+        public ICollection<WishlishDetails> WishlishDetails { get; set; }
+        public ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+
+
+        // xác định một product có thể thuộc nhiều cartdetail
+
+        public Products()
+        {
+            CartDetails = new List<CartDetails>();
+        }
     }
 }

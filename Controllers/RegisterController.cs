@@ -22,6 +22,7 @@ namespace backend_project_core.Controllers
         [Route("register")]
         public string Register(RegisterModel model)
         {
+
             // Lấy dữ liệu từ sql lên
             var existingUser = _userDbContext.Users.SingleOrDefault(p => p.email == model.email);
             // Kiểm tra tính hợp lệ của dữ liệu đầu vào
@@ -42,12 +43,29 @@ namespace backend_project_core.Controllers
                 created_at = DateTime.UtcNow,
                 updated_at = DateTime.UtcNow
             };
-            
-           // Lưu vào cơ sở dữ liệu
+
+
+            // Lưu vào cơ sở dữ liệu
             _userDbContext.Users.Add(user);
             _userDbContext.SaveChanges();
 
+            // Tạo giỏ hàng ứng với user
+            var userID = user.id;
+            var cart = new Carts
+            {
+                idUser = userID,
+            };
+            _userDbContext.Carts.Add(cart);
+            _userDbContext.SaveChanges();
+            // Tạo Wishlist ứng với Users
+            var Wishlist = new Wishlists
+            {
+                idUser = userID,
+            };
+            _userDbContext.Wishlists.Add(Wishlist);
+            _userDbContext.SaveChanges();
             return "Data inserted";
         }
+
     }
 }

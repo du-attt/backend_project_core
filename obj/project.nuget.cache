@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "OqvmrtzQXQ7T5MYXXe1boTO1IqpDazq0ubfsNd4IMgKHtCsSYaMgzQKhr6GliTynibZUUGR8hDIDsz1pStQddg==",
+  "dgSpecHash": "AhDlVJf5Etwwdv+pG3ULK32ZLuOH87838lq1FAOZmg32T7Zmnxu5wst+AMTspsD7iH1tTWvvcr20FsbHJHh4BA==",
   "success": true,
   "projectFilePath": "C:\\Desktop\\Framework\\project-môn học\\backend-project-core\\backend-project-core\\backend-project-core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.24\\microsoft.aspnetcore.authentication.jwtbearer.6.0.24.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",

@@ -31,6 +31,12 @@ namespace backend_project_core.Data
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Xác định thời gian cập nhật tài khoản
         public DateTime updated_at { get; set; }
+        //
+        public ICollection<Carts> Carts { get; set; }
+        //
+        public ICollection<Wishlists> Wishlists { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
+
 
 
         // Hàm chuyển đổi mật khẩu thành dạng json 

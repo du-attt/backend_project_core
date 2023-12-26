@@ -87,3 +87,4 @@ C:\Desktop\Framework\project-môn học\backend-project-core\backend-project-cor
 C:\Desktop\Framework\project-môn học\backend-project-core\backend-project-core\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Desktop\Framework\project-môn học\backend-project-core\backend-project-core\obj\Debug\net6.0\backend-project-core.MvcApplicationPartsAssemblyInfo.cs
 C:\Desktop\Framework\project-môn học\backend-project-core\backend-project-core\obj\Debug\net6.0\backend-project-core.MvcApplicationPartsAssemblyInfo.cache
+C:\Desktop\Framework\project-môn học\backend-project-core\backend-project-core\bin\Debug\net6.0\log4net.dll
